@@ -2,6 +2,7 @@ import os,random
 
 from encrypt import encrypt_file
 from decrypt import decrypt_file
+from Search import search
 
 def random_key():
     rand = random.randrange(100)
@@ -21,6 +22,7 @@ if __name__ == "__main__":
     while True:
         print("1. 파일 잠금")
         print("2. 파일 잠금 해제")
+        print("3. 파일 확인")
         try:
             choice = int(input(">>> "),10)
             if choice<1 or choice >3:
@@ -61,3 +63,10 @@ if __name__ == "__main__":
                     print("파일 잠금 해제가 성공적으로 되었습니다.")
             else:
                 continue
+        elif choice == 3:
+            default_path = os.path.dirname(os.path.realpath(__file__))
+            file = search(default_path)
+            print("프로그램이 위치한 폴더의 모든 파일 내역입니다.")
+            for i in file:
+                print(i)
+            print("")
