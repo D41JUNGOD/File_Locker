@@ -3,7 +3,7 @@ from Crypto.Random import get_random_bytes
 
 import os,struct,hashlib
 
-def encrypt_file(key, in_filename, chunksize=65536):
+def lock_file(key, in_filename, chunksize=65536):
     key = hashlib.sha256(key).digest()
     out_filename = in_filename+".enc"
     iv = get_random_bytes(16)

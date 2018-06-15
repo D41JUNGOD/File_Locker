@@ -1,7 +1,7 @@
 import os,random
 
-from encrypt import encrypt_file
-from decrypt import decrypt_file
+from lock import lock_file
+from unlock import unlock_file
 from Search import search
 
 def random_key():
@@ -41,7 +41,7 @@ if __name__ == "__main__":
                 print("잠금할 파일의 비밀번호를 입력해주세요.")
                 password = input(">>> ")
                 password = bytes(password, encoding='utf-8')
-                encrypt_file(password,path)
+                lock_file(password,path)
                 print("파일이 잠금이 성공적으로 되었습니다.")
             else:
                 continue
@@ -49,6 +49,7 @@ if __name__ == "__main__":
             if random_key() == 1:
                 print("잠금 해제하고 싶은 파일의 경로를 입력해주세요.")
                 path = input(">>> ")
+                path += ".enc"
                 if not os.path.exists(path):
                     print("파일을 찾을 수 없습니다.")
                     continue
@@ -56,7 +57,7 @@ if __name__ == "__main__":
                 print("잠금할 파일의 비밀번호를 입력해주세요.")
                 password = input(">>> ")
                 password = bytes(password,encoding='utf-8')
-                if decrypt_file(password, path) == 0:
+                if unlock_file(password, path) == 0:
                     print("비밀번호가 틀렸습니다.")
                     continue
                 else:
@@ -66,7 +67,7 @@ if __name__ == "__main__":
         elif choice == 3:
             default_path = os.path.dirname(os.path.realpath(__file__))
             file = search(default_path)
-            print("프로그램이 위치한 폴더의 모든 파일 내역입니다.")
+            print("프로그램이 위치한 폴더의 모든 파일 내역입니다.\n")
             for i in file:
                 print(i)
             print("")

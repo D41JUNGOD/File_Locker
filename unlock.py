@@ -2,7 +2,7 @@ from Crypto.Cipher import AES
 
 import os,struct,hashlib
 
-def decrypt_file(key, in_filename, chunksize=24*1024):
+def unlock_file(key, in_filename, chunksize=24*1024):
     key = hashlib.sha256(key).digest()
     out_filename = os.path.splitext(in_filename)[0]
     with open(in_filename, 'rb') as infile:
